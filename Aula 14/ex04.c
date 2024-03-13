@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define TAMANHO_NOME 15
 #define QUANTIA_ELETRODOMESTICOS 5  
@@ -27,12 +28,47 @@ typedef struct Eletrodomestico {
     float potenciaKw, horas, consumoKwH;
 } Eletrodomestico;
 
-void mostrarConsumoRelativo(Eletrodomestico eletrodomesticos[QUANTIA_ELETRODOMESTICOS], float consumoTotal, float dias) {
+Eletrodomestico *criarEletrodomestico() {
+
+    Eletrodomestico *novoEletrodomestico = (Eletrodomestico *)malloc(sizeof(Eletrodomestico));
+
+    if (novoEletrodomestico == NULL) {
+        fprintf(stderr, "Erro de alocação de memória\n");
+        return NULL;
+    }
+
+    printf("Digite o nome do eletrodoméstico (máximo de 15 caracteres)\n");
+    fgets(novoEletrodomestico->nome, TAMANHO_NOME, stdin);
+    novoEletrodomestico->nome[strcspn(novoEletrodomestico->nome, "\n")] = '\0';
+
+    printf("Digite a potência em kW do eletroméstico %s\n", novoEletrodomestico->nome);    
+    scanf("%f", &novoEletrodomestico->potenciaKw);
+
+    printf("Digite a quantidade de horas que o eletroméstico %s fica ativo\n", novoEletrodomestico->nome);    
+    scanf("%f", &novoEletrodomestico->horas);
+
+    setbuf(stdin, NULL);
+
+    novoEletrodomestico->consumoKwH = novoEletrodomestico->potenciaKw * novoEletrodomestico->horas;
+
+    return novoEletrodomestico;
+
+}
+
+void deletarEletrodomestico(Eletrodomestico *eletrodomestico) {
+
+    if (eletrodomestico != NULL) {
+        free(eletrodomestico);
+    }
+
+}
+
+void mostrarConsumoRelativo(Eletrodomestico *eletrodomesticos[QUANTIA_ELETRODOMESTICOS], float consumoTotal, float dias) {
 
     for (int i = 0; i < QUANTIA_ELETRODOMESTICOS; i++) {
-        float consumo = eletrodomesticos[i].consumoKwH * dias;
+        float consumo = eletrodomesticos[i]->consumoKwH * dias;
         float percentualConsumo = (consumo / consumoTotal) * 100;
-        printf("O consumo relativo de energia do eletrodoméstico %s é de %.2f%%\n", eletrodomesticos[i].nome, percentualConsumo);
+        printf("O consumo relativo de energia do eletrodoméstico %s é de %.2f%%\n", eletrodomesticos[i]->nome, percentualConsumo);
     }
 
 }
@@ -42,33 +78,23 @@ int main() {
     float consumoTotal = 0;
     float dias;
 
-    Eletrodomestico eletrodomesticos[QUANTIA_ELETRODOMESTICOS];
+    Eletrodomestico *eletrodomesticos[QUANTIA_ELETRODOMESTICOS];
 
     for (int i = 0; i < QUANTIA_ELETRODOMESTICOS; i++) {
-        printf("Digite o nome do eletrodoméstico de número %d\n", i + 1);
-        fgets(eletrodomesticos[i].nome, TAMANHO_NOME, stdin);
-        eletrodomesticos[i].nome[strcspn(eletrodomesticos[i].nome, "\n")] = '\0';
-
-        printf("Digite a potência, em kW, do eletrodoméstico %s\n", eletrodomesticos[i].nome);
-        scanf("%f", &eletrodomesticos[i].potenciaKw);
-
-        printf("Digite a quantidade de tempo, em horas, que o eletrodoméstico %s fica ligado por dia\n", eletrodomesticos[i].nome);
-        scanf("%f", &eletrodomesticos[i].horas);
-
-        setbuf(stdin, NULL);
-
-        eletrodomesticos[i].consumoKwH = eletrodomesticos[i].horas * eletrodomesticos[i].potenciaKw;
-
-        consumoTotal += eletrodomesticos[i].consumoKwH;
+        eletrodomesticos[i] = criarEletrodomestico();
+        consumoTotal += eletrodomesticos[i]->consumoKwH;
     }
 
-    printf("Digite uma quantidade de dias\n");
+    printf("Digite a quantidade de dias em que os eletromésticos ficaram ativos\n");
     scanf("%f", &dias);
-    setbuf(stdin, NULL);
 
     consumoTotal *= dias;
 
     mostrarConsumoRelativo(eletrodomesticos, consumoTotal, dias);
+
+    for (int i = 0; i < QUANTIA_ELETRODOMESTICOS; i++) {
+        free(eletrodomesticos[i]);
+    }
 
     return 0;
 
