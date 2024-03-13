@@ -57,8 +57,8 @@ int main() {
     printf("COMPROMISSO\n");
     printf("Local: %s\n", novoCompromisso.local);
     printf("Descrição: %s\n", novoCompromisso.descricao);
-    printf("Horário: %i:%i:%i\n", novoCompromisso.horario.hora, novoCompromisso.horario.minutos, novoCompromisso.horario.segundos);
-    printf("Data: %02i/%02i/%04i\n", novoCompromisso.data.dia, novoCompromisso.data.mes, novoCompromisso.data.ano);
+    printf("Horário: %d:%d:%d\n", novoCompromisso.horario.hora, novoCompromisso.horario.minutos, novoCompromisso.horario.segundos);
+    printf("Data: %02d/%02d/%04d\n", novoCompromisso.data.dia, novoCompromisso.data.mes, novoCompromisso.data.ano);
 
     return 0;
 
