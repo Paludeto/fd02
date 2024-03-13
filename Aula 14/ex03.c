@@ -29,6 +29,7 @@ enum {
 
 typedef struct Aluno {
     char nome[TAMANHO_NOME];
+    char curso[TAMANHO_NOME];
     float notas[QUANTIA_NOTAS];
     float media;
     int situacao;
@@ -47,6 +48,10 @@ Aluno *criaAluno() {
     fgets(novoAluno->nome, TAMANHO_NOME, stdin);
     novoAluno->nome[strcspn(novoAluno->nome, "\n")] = '\0';
     novoAluno->media = 0;
+
+    printf("Digite o nome do curso\n");
+    fgets(novoAluno->curso, TAMANHO_NOME, stdin);
+    novoAluno->curso[strcspn(novoAluno->curso, "\n")] = '\0';
 
     for (int i = 0; i < QUANTIA_NOTAS; i++) {
         printf("Digite a nota de número %d\n", i + 1);
@@ -92,6 +97,7 @@ void imprimeInformacoes(Aluno *aluno) {
 
     printf("DADOS DO ALUNO\n");
     printf("Nome: %s\n", aluno->nome);
+    printf("Curso: %s\n", aluno->curso);
     printf("Média: %.2f\n", aluno->media);
     checaSituacao(aluno);
 
