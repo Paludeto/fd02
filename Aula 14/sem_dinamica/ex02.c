@@ -38,26 +38,28 @@ typedef struct Compromisso {
 //sem malloc
 int main() {
 
-    Horario novoHorario;
-    novoHorario.hora = 20;
-    novoHorario.minutos = 42;
-    novoHorario.segundos = 42;
-
-    Data novaData;
-    novaData.dia = 01;
-    novaData.mes = 02;
-    novaData.ano = 2003;
-
     Compromisso novoCompromisso;
-    strncpy(novoCompromisso.local, "UTFPR", TAMANHO_MAXIMO);
-    strncpy(novoCompromisso.descricao, "Um compromisso", TAMANHO_MAXIMO);
-    novoCompromisso.horario = novoHorario;
-    novoCompromisso.data = novaData;
+    
 
     printf("COMPROMISSO\n");
-    printf("Local: %s\n", novoCompromisso.local);
+
+    printf("Digite a descrição\n");
+    fgets(novoCompromisso.descricao, TAMANHO_MAXIMO, stdin);
+    novoCompromisso.descricao[strcspn(novoCompromisso.descricao, "\n")] = '\0';
+
+    printf("Digite o local:\n");
+    fgets(novoCompromisso.local, TAMANHO_MAXIMO, stdin);
+    novoCompromisso.local[strcspn(novoCompromisso.local, "\n")] = '\0';
+
+    printf("Digite a hora no formato HH:MM:SS\n");
+    scanf("%d:%d:%d", &novoCompromisso.horario.hora, &novoCompromisso.horario.minutos, &novoCompromisso.horario.segundos);
+
+    printf("Digite a data no formato DD/MM/AAAA\n");
+    scanf("%d/%d/%d", &novoCompromisso.data.dia, &novoCompromisso.data.mes, &novoCompromisso.data.ano);
+
     printf("Descrição: %s\n", novoCompromisso.descricao);
-    printf("Horário: %d:%d:%d\n", novoCompromisso.horario.hora, novoCompromisso.horario.minutos, novoCompromisso.horario.segundos);
+    printf("Local: %s\n", novoCompromisso.local);
+    printf("Horário: %02d:%02d:%02d\n", novoCompromisso.horario.hora, novoCompromisso.horario.minutos, novoCompromisso.horario.segundos);
     printf("Data: %02d/%02d/%04d\n", novoCompromisso.data.dia, novoCompromisso.data.mes, novoCompromisso.data.ano);
 
     return 0;
