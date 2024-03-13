@@ -90,6 +90,7 @@ void checaSituacao(Aluno *aluno) {
 
 void imprimeInformacoes(Aluno *aluno) {
 
+    printf("DADOS DO ALUNO\n");
     printf("Nome: %s\n", aluno->nome);
     printf("Média: %.2f\n", aluno->media);
     checaSituacao(aluno);
