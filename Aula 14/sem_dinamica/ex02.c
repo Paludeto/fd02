@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAMANHO_MAXIMO 21
+#define TAMANHO_MAXIMO 101
 
 typedef struct Horario {
     int hora, minutos, segundos;
