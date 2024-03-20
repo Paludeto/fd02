@@ -2,7 +2,7 @@
  * @file ex01.c
  * @author Gabriel Paludeto
  * @brief Faça um algoritmo que implemente uma função que receba 3 números
-    inteiros e retorne o maior valor;
+    inteiros e retorne o maior valor. Se algum número for negativo retorne -1;
  * @version 0.1
  * @date 2023-10-31
  * 
@@ -33,6 +33,11 @@ int main(int argc, char **argv) {
     }
 
     maior = retornaMaior(numeros);
+
+    if (maior == -1) {
+        printf("Digite apenas números positivos!\n");
+        return 0;
+    }
     
     printf("O maior número é igual a %i\n", maior);
 
@@ -55,6 +60,10 @@ int retornaMaior(int numeros[3]) {
         if (numeros[i] > maior) {
             maior = numeros[i];
         } 
+
+        if (numeros[i] < 0) {
+            return -1;
+        }
         
     }
 
