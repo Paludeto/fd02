@@ -48,17 +48,13 @@ int main(int argc, char **argv) {
  */
 int retornaMaior(int numeros[3]) {
 
-    int maior = INT_MIN;
+    int maior = numeros[0];
 
     for (int i = 0; i < 3; i++) {
 
         if (numeros[i] > maior) {
             maior = numeros[i];
         } 
-
-        if (numeros[i] < 0) {
-            return -1;
-        }
         
     }
 

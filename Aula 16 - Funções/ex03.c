@@ -20,7 +20,6 @@
 int main(int argc, char **argv);
 float calculo_notas(float n1, float n2, float n3, char letra);
 
-
 int main(int argc, char **argv) {
 
     float n1, n2, n3, resultado;
