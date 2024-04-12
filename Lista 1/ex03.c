@@ -20,6 +20,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void imprimeTriangulo (int n) {
-    
+void imprimeTriangulo(int n) {
+   
+   for (int i = 0; i <= n + 1; i++) {
+      for (int j = 0; j < i; j++) {
+         printf("*");
+      }
+      printf("\n");
+   }
+
+   for (int i = n; i > 0; i--) {
+      for (int j = 0; j < i; j++) {
+         printf("*");
+      }
+      printf("\n");
+   }
+
+}
+
+int main() {
+
+   int n;
+   printf("Digite o valor desejado para a altura de um triângulo lateral\n");
+   scanf("%d", &n);
+
+   imprimeTriangulo(n);
+
+   return 0;
+
 }
