@@ -37,7 +37,7 @@
 #include <stdbool.h>
 
 #define TAMANHO_STRING 21
-#define TAMANHO_ARRAY 1
+#define TAMANHO_ARRAY 6
 
 typedef enum {BRONZE = 1, PRATA, OURO, PLATINA, DIAMANTE, DESAFIANTE, NIVEL_INVALIDO} Tier;
 
