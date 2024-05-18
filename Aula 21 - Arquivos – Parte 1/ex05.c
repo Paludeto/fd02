@@ -14,22 +14,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #define TAMANHO_NOME 21
+#define NUM_CARACTERES 26
+
+int ehLetra(char c) {
+
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+        return 0;
+    } else {
+        return 1;
+    }
+
+}
 
 int main() {
 
+    char caractereAtual;
     char nome[TAMANHO_NOME];
-    char caractereAtual, caractereBuscado;
-    int contador = 0;
+    int contaCaracteres[NUM_CARACTERES] = {0};
     FILE *fp;
 
     printf("Digite o nome do arquivo de texto que você deseja abrir\n");
     fgets(nome, TAMANHO_NOME, stdin);
     nome[strcspn(nome, "\n")] = '\0';
-
-    printf("Digite o caractere a ser buscado\n");
-    scanf("%c", &caractereBuscado);
 
     fp = fopen(nome, "r");
     
@@ -39,12 +48,17 @@ int main() {
     }
 
     while ((caractereAtual = fgetc(fp)) != EOF) {
-        if (caractereAtual == caractereBuscado) {
-            contador++;
+        if (ehLetra(caractereAtual) == 0) {
+            caractereAtual = tolower(caractereAtual);
+            contaCaracteres[caractereAtual - 'a']++;
         }
-    }
+    } 
 
-    printf("O número de caracteres '%c' no arquivo é igual a %d\n", caractereBuscado, contador);
+    printf("Contagem de letras:\n");
+
+    for (int i = 0; i < NUM_CARACTERES; i++) {
+        printf("%c: %d\n", 'a' + i, contaCaracteres[i]);
+    }
 
     fclose(fp);
 
