@@ -57,7 +57,12 @@ int main() {
 
     } while (1);
 
-    vetor = (int *) realloc (vetor, indice * sizeof(int));
+    vetor = (int *) realloc(vetor, indice * sizeof(int));
+
+    if (vetor == NULL) {
+        perror("Erro de alocação\n");
+        exit(EXIT_FAILURE);
+    }
     
     printf("[ ");
     for (int i = 0; i < indice; i++) {
