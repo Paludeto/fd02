@@ -56,6 +56,8 @@ int main() {
         indice++;
 
     } while (1);
+
+    vetor = (int *) realloc (vetor, indice * sizeof(int));
     
     printf("[ ");
     for (int i = 0; i < indice; i++) {
